@@ -155,7 +155,7 @@ mssm.search.cpgc<-function(javaMatrix, budget = 10, convergence = c('none', 'sol
         if(as.integer(budget) != budget){
             warning("Argument `budget` should be an integer. Continuing with value budget = ", as.integer(budget))
         }
-        if(!((is.character(convergence) && convegence%in%c('none', 'solution', 'time')) || ((is.numeric(convergence) ||is.integer(convergence)) && (convergence >= -1 && convergence <= 1)))){
+        if(!((is.character(convergence) && convergence%in%c('none', 'solution', 'time')) || ((is.numeric(convergence) ||is.integer(convergence)) && (convergence >= -1 && convergence <= 1)))){
             stop("Argument `convergence` should be one of 'none', 'solution' or 'time' or an integer (respectively -1, 0 and 1), not ", convergence)
         } else {
             if(is.character(convergence)){
