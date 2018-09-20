@@ -6,9 +6,17 @@ A submatrix is of maximal sum if the sum of its entires (selected from the origi
 This package is a R wrapper for the Scala implementation originally provided.
 
 ### Installation
+Recommended installation of the latest development version is done
+by
+
+    > system(git clone git@github.com:vbranders/mssm.git .)
+    > library(devtools)
+    > devtools::install()
+    
 Recommended installation of the latest development version is via
 
 	> library(devtools)
+	> 
 	> install_github("vbranders/mssm")
 
 in R.
