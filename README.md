@@ -33,7 +33,7 @@ To get the actual path to the JDK (assuming it is version 1.8.0) and the value o
 
 Both should match. If this is not the case, you have to set up the JDK, through the command line, as follows:
 
-	$ export $JAVA_HOME=`/usr/libexec/java_home -v 1.8.0`
+	$ export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0`
 
 Then, to detect current Java setup and update the corresponding configuration in R, execute this command:
 
