@@ -3,7 +3,6 @@
 export(mssm.asJavaMatrix)
 export(mssm.fromJavaMatrix)
 export(mssm.getHeuristicReordering)
-export(mssm.getJar)
 export(mssm.getUpperBound)
 export(mssm.loadMatrix)
 export(mssm.search.cpgc)

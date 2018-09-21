@@ -1,24 +1,5 @@
-#' Transform a Java Matrix into a matrix
+#' Get the required JAR for the [mssm] package
 #'
-#' Produces a R matrix from a Java two-dimensionnal array of double
-#' (a Java Matrix).
-#' Java Matrices are the standard type used for subsequent analysis
-#' with the [mssm] package.
-#'
-#' @param javaMatrix a Java two-dimensionnal array of double (called
-#' Java Matrix).
-#' @return A standard R matrix.
-#' @seealso [mssm.toJavaMatrix()] to transform a matrix into a Java
-#' Matrix and [mssm.loadMatrix()] to load a Java matrix from a file.
-#' See also package [mssm].
-#' @export
-mssm.getJar<-function(){
-    #Check that the md5 sum is valid !
-    # library(tools)
-    #md5sum(file.path(system.file(package="mssm"), "java/root.jar"))
-    download.file("https://github.com/vbranders/mssm/raw/master/inst/java/root.jar", destfile = file.path(system.file(package="mssm"), "java/root.jar"))
-}
-
 #' Lists Java classes of the [mssm] package
 #'
 #' Lists all Java classes and their associated location.
