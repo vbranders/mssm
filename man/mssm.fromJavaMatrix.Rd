@@ -19,6 +19,10 @@ Produces a R matrix from a Java two-dimensionnal array of double
 Java Matrices are the standard type used for subsequent analysis
 with the \link{mssm} package.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.toJavaMatrix]{mssm.toJavaMatrix()}} to transform a matrix into a Java
 Matrix and \code{\link[=mssm.loadMatrix]{mssm.loadMatrix()}} to load a Java matrix from a file.

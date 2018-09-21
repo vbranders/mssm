@@ -101,6 +101,10 @@ If parameter \code{lns} is \code{TRUE}, the search is completed whenever the
 For some scenarios, one might wants to abort the search before completion.
 This is doable through the combination of parameters \code{budget} and \code{convergence}.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}} and \code{\link[=mssm.loadMatrix]{mssm.loadMatrix()}} to transform
 a matrix to a Java matrix and to load a Java matrix from a file. See

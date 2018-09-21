@@ -19,6 +19,10 @@ as the sum of all positive values.
 This can be usefull to determines if the found solution match the upper
 bound computed here as this means that the solution is an optimal solution.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}} and \code{\link[=mssm.search.cpgc]{mssm.search.cpgc()}} for the
 transformation of a matrix to a Java Matrix and the search of a submatrix

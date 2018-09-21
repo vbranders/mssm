@@ -18,6 +18,10 @@ a R matrix.
 Java Matrices are the standard type used for subsequent analysis with
 the \link{mssm} package.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.fromJavaMatrix]{mssm.fromJavaMatrix()}} to transform a Java Matrix into a
 matrix and \code{\link[=mssm.loadMatrix]{mssm.loadMatrix()}} to load a Java Matrix from a file.

@@ -3,6 +3,7 @@
 #' Lists all Java classes and their associated location.
 #'
 #' @return It returns a named vactor of the class locations.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.jInst()] for the instanciation of java Objects.
 #' See also package [mssm].
 mssm.listClasses<-function(){
@@ -23,6 +24,7 @@ mssm.listClasses<-function(){
 #' @param name a string corresponding to the name of the class as
 #' indicated by [mssm.listClasses()].
 #' @return A Java instance of the named class.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso \code{\link{mssm.listClasses}} for a list of possible class
 #' names. See also package [mssm].
 mssm.jInst<-function(name){
@@ -44,6 +46,7 @@ mssm.jInst<-function(name){
 #' @param filePath the name of the file which the data are to be read from.
 #' @param sep the field separator character.
 #' @return A Java two-dimensionnal array of double (called Java Matrix).
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.asJavaMatrix()] and [mssm.fromJavaMatrix()] to transform
 #' a matrix into a Java Matrix and conversely. See also package [mssm].
 #' @export
@@ -62,6 +65,7 @@ mssm.loadMatrix<-function(filePath='data.tsv', sep='\t'){
 #'
 #' @param matrix a matrix to be transformed into a Java Matrix.
 #' @return A Java two-dimensionnal array of double (called Java Matrix).
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.fromJavaMatrix()] to transform a Java Matrix into a
 #' matrix and [mssm.loadMatrix()] to load a Java Matrix from a file.
 #' See also package [mssm].
@@ -87,6 +91,7 @@ mssm.asJavaMatrix<-function(matrix){
 #' @param javaMatrix a Java two-dimensionnal array of double (called
 #' Java Matrix).
 #' @return A standard R matrix.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.toJavaMatrix()] to transform a matrix into a Java
 #' Matrix and [mssm.loadMatrix()] to load a Java matrix from a file.
 #' See also package [mssm].

@@ -17,6 +17,10 @@ A Java instance of the named class.
 This function retrieves a Java instance of a named class.
 The class names and locations are listed by \code{\link[=mssm.listClasses]{mssm.listClasses()}}.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link{mssm.listClasses}} for a list of possible class
 names. See also package \link{mssm}.

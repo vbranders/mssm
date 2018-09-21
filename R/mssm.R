@@ -19,6 +19,7 @@
 #' @param javaMatrix a Java two-dimensionnal array of double.
 #' @return A numeric value corresponding to the sum of all positive values in
 #' the Java matrix.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.asJavaMatrix()] and [mssm.search.cpgc()] for the
 #' transformation of a matrix to a Java Matrix and the search of a submatrix
 #' of maximal sum. See also package [mssm].
@@ -44,6 +45,7 @@ mssm.getUpperBound<-function(javaMatrix){
 #'
 #' @param javaMatrix a Java two-dimensionnal array of double.
 #' @return A vector of the columns indices to be investigated first.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.asJavaMatrix()] and [mssm.search.cpgc()] for the
 #' transformation of a matrix to a Java Matrix and the search of a submatrix
 #' of maximal sum. See also package [mssm].
@@ -140,6 +142,7 @@ mssm.getHeuristicReordering<-function(javaMatrix){
 #' solution are fixed and the search is performed on the non-fixed columns.
 #' @return A submatrix of maximal sum, represented as a list, with the
 #' associated sum, columns and rows.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.asJavaMatrix()] and [mssm.loadMatrix()] to transform
 #' a matrix to a Java matrix and to load a Java matrix from a file. See
 #' also [mssm.getHeuristicReordering()] for an heuristic ordering of the
@@ -192,9 +195,10 @@ mssm.search.cpgc<-function(javaMatrix, budget = 10, convergence = c('none', 'sol
 #'
 #' Ensures that object òbject` is of type `class` and return a boolean. If type is not valid, it generates a warning.
 #'
-#' @param object a Java object to be validated
-#' @param class the type that should be matched by `object`
-#' @return a boolean indicating if the object is of expected type
+#' @param object a Java object to be validated.
+#' @param class the type that should be matched by `object`.
+#' @return A boolean indicating if the object is of expected type.
+#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso \code{\link{.jinstanceof}}.
 mssm.isValid<-function(object, class, silent=F){
     if(.jinstanceof(object, class)){

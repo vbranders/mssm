@@ -20,6 +20,10 @@ a file.
 Java Matrices are the standard type used for subsequent analysis with
 the \link{mssm} package.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}} and \code{\link[=mssm.fromJavaMatrix]{mssm.fromJavaMatrix()}} to transform
 a matrix into a Java Matrix and conversely. See also package \link{mssm}.

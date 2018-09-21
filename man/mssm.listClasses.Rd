@@ -12,6 +12,10 @@ It returns a named vactor of the class locations.
 \description{
 Lists all Java classes and their associated location.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.jInst]{mssm.jInst()}} for the instanciation of java Objects.
 See also package \link{mssm}.

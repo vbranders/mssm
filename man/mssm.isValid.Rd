@@ -7,16 +7,20 @@
 mssm.isValid(object, class, silent = F)
 }
 \arguments{
-\item{object}{a Java object to be validated}
+\item{object}{a Java object to be validated.}
 
-\item{class}{the type that should be matched by \code{object}}
+\item{class}{the type that should be matched by \code{object}.}
 }
 \value{
-a boolean indicating if the object is of expected type
+A boolean indicating if the object is of expected type.
 }
 \description{
 Ensures that object òbject\code{is of type}class` and return a boolean. If type is not valid, it generates a warning.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link{.jinstanceof}}.
 }

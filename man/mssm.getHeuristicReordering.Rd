@@ -21,6 +21,10 @@ are positive.
 The purpose of this function is to provide one (among many possible)
 heuristic ordering of the columns to be used in the subsequent search.
 }
+\section{Maintainer}{
+ Vincent Branders <vincent.branders@uclouvain.be>.
+}
+
 \seealso{
 \code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}} and \code{\link[=mssm.search.cpgc]{mssm.search.cpgc()}} for the
 transformation of a matrix to a Java Matrix and the search of a submatrix
