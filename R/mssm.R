@@ -174,11 +174,10 @@ mssm.search.cpgc<-function(javaMatrix, budget = 10, convergence = c('none', 'sol
                 solution = method$search(lns, as.integer(lns.nRestarts), as.integer(lns.failureLimit), as.integer(lns.maxDiscrepancy), as.integer(lns.restartFilter))
                 res = list()
                 res$sum = solution$getObjective()
-                res$rows = solution$getRowIndices()
-                res$cols = solution$getColIndices()
-                res$boolean = list()
-                res$boolean$cols = solution$getColBooleanVector()
-                res$boolean$rows = solution$getRowBooleanVector()
+                res$rows = solution$getRowIndices()+1
+                res$cols = solution$getColIndices()+1
+                res$boolean.cols = solution$getColBooleanVector()
+                res$boolean.rows = solution$getRowBooleanVector()
                 return(res)
             }
         }

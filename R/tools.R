@@ -1,5 +1,3 @@
-#' Get the required JAR for the [mssm] package
-#'
 #' Lists Java classes of the [mssm] package
 #'
 #' Lists all Java classes and their associated location.
