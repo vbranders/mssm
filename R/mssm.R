@@ -101,7 +101,8 @@ mssm.getHeuristicReordering<-function(javaMatrix){
 #'    \item{`"solution"` or `0`}{If the last `budget` solutions
 #'    identified did not improve the sum, the search is aborted.}
 #'    \item{`"time"` or `1`}{Abort the search if `budget` seconds have
-#'    elapsed since the last improving solution was found.}
+#'    elapsed since the last improving solution was found. This is the
+#'    default value.}
 #' }
 #' @param verbose indicates whether improving solutions should be
 #' printed or not.
@@ -157,6 +158,9 @@ mssm.search.cpgc<-function(javaMatrix, budget = 10, convergence = c('none', 'sol
         }
         if(as.integer(budget) != budget){
             warning("Argument `budget` should be an integer. Continuing with value budget = ", as.integer(budget))
+        }
+        if(length(convergence) != 1){
+            convergence = 1
         }
         if(!((is.character(convergence) && convergence%in%c('none', 'solution', 'time')) || ((is.numeric(convergence) ||is.integer(convergence)) && (convergence >= -1 && convergence <= 1)))){
             stop("Argument `convergence` should be one of 'none', 'solution' or 'time' or an integer (respectively -1, 0 and 1), not ", convergence)

@@ -30,7 +30,8 @@ only when completed, which means that the solution is optimal
 \item{\code{"solution"} or \code{0}}{If the last \code{budget} solutions
 identified did not improve the sum, the search is aborted.}
 \item{\code{"time"} or \code{1}}{Abort the search if \code{budget} seconds have
-elapsed since the last improving solution was found.}
+elapsed since the last improving solution was found. This is the
+default value.}
 }}
 
 \item{verbose}{indicates whether improving solutions should be
