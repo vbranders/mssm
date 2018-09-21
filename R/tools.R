@@ -1,3 +1,18 @@
+#' Download the [mssm] JAR
+#'
+#' Retrieves the required JAR for the package.
+#' This function should be called once, right after
+#' package installation and before first call to
+#' `library(mssm)`.
+#'
+#' @export
+mssm.getJar<-function(){
+    #Check that the md5 sum is valid !
+    # library(tools)
+    #md5sum(file.path(system.file(package="mssm"), "java/root.jar"))
+    download.file("https://github.com/vbranders/mssm/raw/master/inst/java/root.jar", destfile = file.path(system.file(package="mssm"), "java/root.jar"))
+}
+
 #' Lists Java classes of the [mssm] package
 #'
 #' Lists all Java classes and their associated location.
