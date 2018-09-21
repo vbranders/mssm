@@ -4,7 +4,7 @@
     .jaddClassPath('inst/java/root.jar')
     #Test if the jar is required
     if(file.size(file.path(system.file(package="mssm"), "java/root.jar"))/(1024**2) < 1){
-        warning("The JAR file is lighter than expected.\n
+        cat("The JAR file is lighter than expected.\n
                 The actual JAR file used by the package will be downloaded and installed in the library `", system.file(package="mssm"),"`.\n
                 > If this is the time you load the package since a first or new install, you should ignore this warning.
                 > Otherwise, you should contact the maintainer specifying your error.")
