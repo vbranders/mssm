@@ -1,5 +1,5 @@
 .onLoad <- function(libname, pkgname) {
-    .jpackage(pkgname, lib.loc=libname)
+    .jpackage(pkgname, lib.loc=unique(libname, c(.libPaths())))
     .jaddLibrary('root', 'inst/java/root.jar')
     .jaddClassPath('inst/java/root.jar')
     #Test if the jar is required
