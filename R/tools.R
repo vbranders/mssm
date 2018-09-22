@@ -92,7 +92,7 @@ mssm.asJavaMatrix<-function(matrix){
 #' Java Matrix).
 #' @return A standard R matrix.
 #' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
-#' @seealso [mssm.toJavaMatrix()] to transform a matrix into a Java
+#' @seealso [mssm.asJavaMatrix()] to transform a matrix into a Java
 #' Matrix and [mssm.loadMatrix()] to load a Java matrix from a file.
 #' See also package [mssm].
 #' @export

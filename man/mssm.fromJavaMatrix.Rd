@@ -24,7 +24,7 @@ with the \link{mssm} package.
 }
 
 \seealso{
-\code{\link[=mssm.toJavaMatrix]{mssm.toJavaMatrix()}} to transform a matrix into a Java
+\code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}} to transform a matrix into a Java
 Matrix and \code{\link[=mssm.loadMatrix]{mssm.loadMatrix()}} to load a Java matrix from a file.
 See also package \link{mssm}.
 }
