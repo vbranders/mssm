@@ -2,7 +2,7 @@
 This package provides tools for the identification of ***submatrix of maximal sum***.
 A submatrix is a rectangular, non-necessarily contiguous, subset of rows and of columns of a (larger) matrix.
 The submatrices that are searched for are of maximal sum.
-A submatrix is of maximal sum if the sum of its entires (selected from the original matrix) is of maximal sum.
+A submatrix is of maximal sum if the sum of its entries (selected from the original matrix) is of maximal sum.
 This package is a R wrapper for the Scala implementation originally provided.
 
 ## Installation
