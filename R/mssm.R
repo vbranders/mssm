@@ -16,21 +16,18 @@
 #' This can be usefull to determines if the found solution match the upper
 #' bound computed here as this means that the solution is an optimal solution.
 #'
-#' @param javaMatrix a Java two-dimensionnal array of double.
+#' @param x a matrix or a Java two-dimensionnal array of double ([mssm.asJavaMatrix()]).
 #' @return A numeric value corresponding to the sum of all positive values in
-#' the Java matrix.
+#' the matrix.
 #' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.asJavaMatrix()] and [mssm.search.cpgc()] for the
 #' transformation of a matrix to a Java Matrix and the search of a submatrix
 #' of maximal sum. See also package [mssm].
 #' @export
-mssm.getUpperBound<-function(javaMatrix){
-    if(!mssm.isValid(javaMatrix, '[[D')){
-        stop("Argument `javaMatrix` should be a Java two-dimensionnal array of double.")
-    } else {
-        JHelper = mssm.jInst("Helper")
-        return(JHelper$getUpperBound(javaMatrix))
-    }
+mssm.getUpperBound<-function(x){
+    javaMatrix = mssm.tools.as(x, 'javaMatrix')
+    JHelper = mssm.jInst("Helper")
+    return(JHelper$getUpperBound(javaMatrix))
 }
 
 #' Heuristic ordering of the columns
@@ -43,23 +40,17 @@ mssm.getUpperBound<-function(javaMatrix){
 #' The purpose of this function is to provide one (among many possible)
 #' heuristic ordering of the columns to be used in the subsequent search.
 #'
-#' @param javaMatrix a Java two-dimensionnal array of double.
-#' @return A vector of the columns indices to be investigated first.
+#' @param x a matrix or a Java two-dimensionnal array of double ([mssm.asJavaMatrix()]).
+#' @return A vector of the columns indices to be investigated first (starting from zero).
 #' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso [mssm.asJavaMatrix()] and [mssm.search.cpgc()] for the
 #' transformation of a matrix to a Java Matrix and the search of a submatrix
 #' of maximal sum. See also package [mssm].
 #' @export
-mssm.getHeuristicReordering<-function(javaMatrix){
-    if(!is.matrix(javaMatrix) && !mssm.isValid(javaMatrix, '[[D')){
-        stop("Argument `javaMatrix` should be a Java two-dimensionnal array of double.")
-    } else {
-        if(is.matrix(javaMatrix)){
-            javaMatrix = mssm.asJavaMatrix(javaMatrix)
-        }
-        JHelper = mssm.jInst("Helper")
-        return(JHelper$heuristicReordering(javaMatrix)+1)
-    }
+mssm.getHeuristicReordering<-function(x){
+    javaMatrix = mssm.tools.as(x, 'javaMatrix')
+    JHelper = mssm.jInst("Helper")
+    return(JHelper$heuristicReordering(javaMatrix)+1)
 }
 
 
@@ -84,8 +75,7 @@ mssm.getHeuristicReordering<-function(javaMatrix){
 #' For some scenarios, one might wants to abort the search before completion.
 #' This is doable through the combination of parameters `budget` and `convergence`.
 #'
-#' @param javaMatrix a Java two-dimensionnal array of double (Java Matrix) or
-#' a R matrix.
+#' @param x a matrix or a Java two-dimensionnal array of double ([mssm.asJavaMatrix()]).
 #' @param budget a limit to prevent long searches.
 #' Its value is used in combination with parameter `convergence`.
 #' It corresponds either to the maximum number of solutions without
@@ -149,68 +139,39 @@ mssm.getHeuristicReordering<-function(javaMatrix){
 #' also [mssm.getHeuristicReordering()] for an heuristic ordering of the
 #' columns. See also package [mssm].
 #' @export
-mssm.search.cpgc<-function(javaMatrix, budget = 10, convergence = c('none', 'solution', 'time'), verbose = FALSE, lowerBound = 0, lightFilter = FALSE, variableOrdering = NULL, lns = FALSE, lns.nRestarts = 100, lns.failureLimit = 500, lns.maxDiscrepancy = 2, lns.restartFilter = 70){
-    if(!is.matrix(javaMatrix) && !mssm.isValid(javaMatrix, '[[D', silent = T)){
-        stop("Argument `javaMatrix` should be a Java two-dimensionnal array of double or a R matrix.")
-    } else {
-        if(is.matrix(javaMatrix)){
-            javaMatrix = mssm.asJavaMatrix(javaMatrix)
-        }
-        if(as.integer(budget) != budget){
-            warning("Argument `budget` should be an integer. Continuing with value budget = ", as.integer(budget))
-        }
-        if(length(convergence) != 1){
-            convergence = 1
-        }
-        if(!((is.character(convergence) && convergence%in%c('none', 'solution', 'time')) || ((is.numeric(convergence) ||is.integer(convergence)) && (convergence >= -1 && convergence <= 1)))){
-            stop("Argument `convergence` should be one of 'none', 'solution' or 'time' or an integer (respectively -1, 0 and 1), not ", convergence)
-        } else {
-            if(is.character(convergence)){
-                convergence = switch(convergence, 'none' = -1, 'solution' = 0, 'time' = 1)
-            }
-            if(!is.null(variableOrdering) && !(is.vector(variableOrdering) && length(variableOrdering) == dim(mssm.fromJavaMatrix(javaMatrix))[2])){
-                stop("Argument `variableOrdering` should be NA or a vector of size equal to the number of columns of JavaMatrix.")
-            } else {
-                method = new(mssm.jInst("CPGC"), javaMatrix, as.integer(budget), as.integer(convergence), verbose, as.numeric(lowerBound), lightFilter)
-                if(!is.null(variableOrdering)){
-                    if(min(variableOrdering) == 1 && max(variableOrdering) == length(variableOrdering)){
-                        variableOrdering = variableOrdering - 1
-                    }
-                    method$heuristicOnCols(as.integer(variableOrdering))
-                }
-                solution = method$search(lns, as.integer(lns.nRestarts), as.integer(lns.failureLimit), as.integer(lns.maxDiscrepancy), as.integer(lns.restartFilter))
-                res = list()
-                res$sum = solution$getObjective()
-                res$rows = solution$getRowIndices()+1
-                res$cols = solution$getColIndices()+1
-                res$boolean.cols = solution$getColBooleanVector()
-                res$boolean.rows = solution$getRowBooleanVector()
-                return(res)
-            }
-        }
+mssm.search.cpgc<-function(x, budget = 10, convergence = 'time', verbose = FALSE, lowerBound = 0, lightFilter = FALSE, variableOrdering = NULL, lns = FALSE, lns.nRestarts = 100, lns.failureLimit = 500, lns.maxDiscrepancy = 2, lns.restartFilter = 70){
+    #Validate the matrix as a JavaMatrix
+    javaMatrix = mssm.tools.as(x, 'javaMatrix')
+    #Validate the budget as an integer
+    if(as.integer(budget) != budget){
+        budget = as.integer(budget)
+        warning("Argument `budget` should be an integer. Continuing with value budget = ", budget)
     }
+    #Validate the budget as an integer or length 1 string
+    if(length(convergence) != 1 || !((is.character(convergence) && convergence%in%c('none', 'solution', 'time')) || ((is.numeric(convergence) ||is.integer(convergence)) && (convergence >= -1 && convergence <= 1)))){
+        stop("Argument `convergence` should be one of 'none', 'solution' or 'time' or an integer (respectively -1, 0 and 1), not ", convergence, '\nSee ?mssm.search.cpgc')
+    } else if(is.character(convergence)){
+        convergence = switch(convergence, 'none' = -1, 'solution' = 0, 'time' = 1)
+    }
+    if(!is.null(variableOrdering) && !(is.vector(variableOrdering) && length(variableOrdering) == dim(mssm.fromJavaMatrix(javaMatrix))[2])){
+        stop("Argument `variableOrdering` should be NA or a vector of size equal to the number of columns of `x`.")
+    }
+    method = new(mssm.jInst("CPGC"), javaMatrix, budget, as.integer(convergence), verbose, as.numeric(lowerBound), lightFilter)
+    if(!is.null(variableOrdering)){
+        if(min(variableOrdering) == 1 && max(variableOrdering) == length(variableOrdering)){
+            variableOrdering = variableOrdering - 1
+        }
+        method$heuristicOnCols(as.integer(variableOrdering))
+    }
+    solution = method$search(lns, as.integer(lns.nRestarts), as.integer(lns.failureLimit), as.integer(lns.maxDiscrepancy), as.integer(lns.restartFilter))
+    res = list()
+    res$sum = solution$getObjective()
+    res$rows = solution$getRowIndices()+1
+    res$cols = solution$getColIndices()+1
+    res$boolean.cols = solution$getColBooleanVector()
+    res$boolean.rows = solution$getRowBooleanVector()
+    return(res)
 }
 
 
-###----------------------------------------
 
-
-#' Ensures type of objects
-#'
-#' Ensures that object òbject` is of type `class` and return a boolean. If type is not valid, it generates a warning.
-#'
-#' @param object a Java object to be validated.
-#' @param class the type that should be matched by `object`.
-#' @return A boolean indicating if the object is of expected type.
-#' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
-#' @seealso \code{\link{.jinstanceof}}.
-mssm.isValid<-function(object, class, silent=F){
-    if(.jinstanceof(object, class)){
-        return(TRUE)
-    } else {
-        if(!silent){
-            warning("Wrong parameter type !")
-        }
-        return(FALSE)
-    }
-}
