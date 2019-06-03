@@ -4,14 +4,14 @@
 \alias{mssm.getUpperBound}
 \title{Computes the upper bound of a matrix}
 \usage{
-mssm.getUpperBound(javaMatrix)
+mssm.getUpperBound(x)
 }
 \arguments{
-\item{javaMatrix}{a Java two-dimensionnal array of double.}
+\item{x}{a matrix or a Java two-dimensionnal array of double (\code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}}).}
 }
 \value{
 A numeric value corresponding to the sum of all positive values in
-the Java matrix.
+the matrix.
 }
 \description{
 Computes the upper bound of a matrix. The upper bound is computed here

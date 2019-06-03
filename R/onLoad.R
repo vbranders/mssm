@@ -1,4 +1,11 @@
+#' @importFrom rJava .jpackage
+#' @importFrom rJava .jaddLibrary
+#' @importFrom rJava .jaddClassPath
+#' @importFrom utils download.file
+#' 
 .onLoad <- function(libname, pkgname) {
+    #library(rJava)
+    #library(utils)
     .jpackage(pkgname, lib.loc=unique(libname, c(.libPaths())))
     .jaddLibrary('root', 'inst/java/root.jar')
     .jaddClassPath('inst/java/root.jar')
@@ -12,4 +19,4 @@
     }
     
 } #Hook function that R will call when this package is being loaded
-#devtools::document()
+#devtools::document() #Uncomment and run for DESCRIPTION file

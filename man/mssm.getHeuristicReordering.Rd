@@ -4,13 +4,13 @@
 \alias{mssm.getHeuristicReordering}
 \title{Heuristic ordering of the columns}
 \usage{
-mssm.getHeuristicReordering(javaMatrix)
+mssm.getHeuristicReordering(x)
 }
 \arguments{
-\item{javaMatrix}{a Java two-dimensionnal array of double.}
+\item{x}{a matrix or a Java two-dimensionnal array of double (\code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}}).}
 }
 \value{
-A vector of the columns indices to be investigated first.
+A vector of the columns indices to be investigated first (starting from zero).
 }
 \description{
 Returns an ordering of the column indices to improve the search of

@@ -23,6 +23,7 @@ mssm.listClasses<-function(){
 #' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso \code{\link{mssm.listClasses}} for a list of possible class
 #' names. See also package [mssm].
+#' @importFrom rJava J
 mssm.jInst<-function(name){
     if(name %in% names(mssm.listClasses())){
         return(J(mssm.listClasses()[name]))
@@ -81,6 +82,8 @@ mssm.asJavaMatrix<-function(matrix){
             #Test if can coerce to numeric
             matrix = mssm.testWarning(as.numeric(matrix), 'Argument `matrix` cannot be coerced to numeric Warning while doing as.numeric(matrix).', stop=1)
             return(mssm.internal.asJavaMatrix(matrix))
+        } else {
+            return(mssm.internal.asJavaMatrix(matrix))
         }
     # }
 }
@@ -122,19 +125,28 @@ mssm.fromJavaMatrix<-function(javaMatrix){
 mssm.isJava<-function(o){
     return(mssm.isJavaObject(o) || mssm.isJavaClassName(o))
 }
+
+#' @importFrom methods is
 mssm.isJavaObject<-function(o){
     return(is(o, 'jobjRef'))
 }
+
+#' @importFrom methods is
 mssm.isJavaArray<-function(o){
     return(is(o, 'jarrayRef')) #subclass of jobjRef
 }
+
+#' @importFrom methods is
 mssm.isJavaRectArray<-function(o){
     return(is(o, 'jrectRef')) #subclass of jobjRef
 }
+
+#' @importFrom methods is
 mssm.isJavaClassName<-function(o){
     return(is(o, 'jclassName'))
 }
 
+#' @importFrom methods is
 mssm.testWarning<-function(call, msg, stop=0){
     resCall = tryCatch(call,error=function(e) e, warning=function(w) w)
     if(is(resCall,"warning")){
@@ -159,9 +171,11 @@ mssm.testWarning<-function(call, msg, stop=0){
 #'
 #' @param object a Java object to be validated.
 #' @param class the type that should be matched by `object`.
+#' @param silent Boolean preventing (\code{TRUE}) error message is not valid.
 #' @return A boolean indicating if the object is of expected type.
 #' @section Maintainer: Vincent Branders <vincent.branders\@uclouvain.be>.
 #' @seealso \code{\link{.jinstanceof}}.
+#' @importFrom rJava .jinstanceof
 mssm.isValid<-function(object, class, silent=F){
     if(.jinstanceof(object, class)){
         return(TRUE)
@@ -179,12 +193,13 @@ mssm.isValid<-function(object, class, silent=F){
 ######
 ######
 ######
+#' @importFrom methods is
 mssm.tools.as<-function(x, type){
     if(type == 'javaMatrix'){
         #Test if it is a rectangular java array
         if(mssm.isJavaRectArray(x)){
             #Test if it consist of a Java two-dimensionnal array of double
-            if(mssm.isValid(javaMatrix, '[[D')){
+            if(mssm.isValid(x, '[[D')){
                 #Then returns it
                 return(x)
             } else {

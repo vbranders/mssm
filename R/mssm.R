@@ -87,7 +87,7 @@ mssm.getHeuristicReordering<-function(x){
 #' \describe{
 #'    \item{`"none"` or `-1`}{The search is not aborted. It will stop
 #'    only when completed, which means that the solution is optimal
-#'    (if `lns == \code{FALSE}`) or all lns restarts are done.}
+#'    (if `lns == FALSE`) or all lns restarts are done.}
 #'    \item{`"solution"` or `0`}{If the last `budget` solutions
 #'    identified did not improve the sum, the search is aborted.}
 #'    \item{`"time"` or `1`}{Abort the search if `budget` seconds have
@@ -104,7 +104,7 @@ mssm.getHeuristicReordering<-function(x){
 #' any solution.
 #' @param lightFilter reduces the computational cost of pruning the
 #' search tree at the expense of a reduced filtering (if `lightFilter
-#' == \code{TRUE}`). It is preferable to set it to \code{FALSE} for very
+#' == TRUE`). It is preferable to set it to \code{FALSE} for very
 #' large matrices as one prefer a stronger filtering of sub-optimal
 #' solutions, even at the expense of some additional computations.
 #' @param variableOrdering is an ordering of the columns indices. It
@@ -139,6 +139,7 @@ mssm.getHeuristicReordering<-function(x){
 #' also [mssm.getHeuristicReordering()] for an heuristic ordering of the
 #' columns. See also package [mssm].
 #' @export
+#' @importFrom methods new
 mssm.search.cpgc<-function(x, budget = 10, convergence = 'time', verbose = FALSE, lowerBound = 0, lightFilter = FALSE, variableOrdering = NULL, lns = FALSE, lns.nRestarts = 100, lns.failureLimit = 500, lns.maxDiscrepancy = 2, lns.restartFilter = 70){
     #Validate the matrix as a JavaMatrix
     javaMatrix = mssm.tools.as(x, 'javaMatrix')

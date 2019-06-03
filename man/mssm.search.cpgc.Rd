@@ -4,15 +4,14 @@
 \alias{mssm.search.cpgc}
 \title{Searches for a Max-Sum Submatrix using CPGC}
 \usage{
-mssm.search.cpgc(javaMatrix, budget = 10, convergence = c("none",
-  "solution", "time"), verbose = FALSE, lowerBound = 0,
-  lightFilter = FALSE, variableOrdering = NULL, lns = FALSE,
-  lns.nRestarts = 100, lns.failureLimit = 500,
-  lns.maxDiscrepancy = 2, lns.restartFilter = 70)
+mssm.search.cpgc(x, budget = 10, convergence = "time",
+  verbose = FALSE, lowerBound = 0, lightFilter = FALSE,
+  variableOrdering = NULL, lns = FALSE, lns.nRestarts = 100,
+  lns.failureLimit = 500, lns.maxDiscrepancy = 2,
+  lns.restartFilter = 70)
 }
 \arguments{
-\item{javaMatrix}{a Java two-dimensionnal array of double (Java Matrix) or
-a R matrix.}
+\item{x}{a matrix or a Java two-dimensionnal array of double (\code{\link[=mssm.asJavaMatrix]{mssm.asJavaMatrix()}}).}
 
 \item{budget}{a limit to prevent long searches.
 Its value is used in combination with parameter \code{convergence}.
@@ -26,7 +25,7 @@ be any of the following:
 \describe{
 \item{\code{"none"} or \code{-1}}{The search is not aborted. It will stop
 only when completed, which means that the solution is optimal
-(if \code{lns == \code{FALSE}}) or all lns restarts are done.}
+(if \code{lns == FALSE}) or all lns restarts are done.}
 \item{\code{"solution"} or \code{0}}{If the last \code{budget} solutions
 identified did not improve the sum, the search is aborted.}
 \item{\code{"time"} or \code{1}}{Abort the search if \code{budget} seconds have
@@ -45,7 +44,7 @@ and a value above the optimal sum will prevent the identification of
 any solution.}
 
 \item{lightFilter}{reduces the computational cost of pruning the
-search tree at the expense of a reduced filtering (if \code{lightFilter == \code{TRUE}}). It is preferable to set it to \code{FALSE} for very
+search tree at the expense of a reduced filtering (if \code{lightFilter == TRUE}). It is preferable to set it to \code{FALSE} for very
 large matrices as one prefer a stronger filtering of sub-optimal
 solutions, even at the expense of some additional computations.}
 
