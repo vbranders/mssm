@@ -68,6 +68,7 @@ mssm.loadMatrix<-function(filePath='data.tsv', sep='\t'){
 #' See also package [mssm].
 #' @export
 mssm.asJavaMatrix<-function(matrix){
+    return(mssm.tools.as(matrix, "javaMatrix"))
     #Tests if it is a Java matrix
     if(mssm.isJavaRectArray(matrix)){
         return(matrix)
@@ -79,12 +80,12 @@ mssm.asJavaMatrix<-function(matrix){
         if(!is.matrix(matrix)){
             #Test if can coerce to matrix
             matrix = mssm.testWarning(as.matrix(matrix), 'Argument `matrix` cannot be coerced to matrix. Warning while doing as.matrix(matrix).', stop=1)
+        }
+        if(!is.numeric(matrix)){
             #Test if can coerce to numeric
             matrix = mssm.testWarning(as.numeric(matrix), 'Argument `matrix` cannot be coerced to numeric Warning while doing as.numeric(matrix).', stop=1)
-            return(mssm.internal.asJavaMatrix(matrix))
-        } else {
-            return(mssm.internal.asJavaMatrix(matrix))
         }
+        return(mssm.internal.asJavaMatrix(matrix))
     # }
 }
 
