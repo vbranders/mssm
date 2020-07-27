@@ -142,7 +142,7 @@ mssm.getHeuristicReordering<-function(x){
 #' @importFrom methods new
 mssm.search.cpgc<-function(x, budget = 10, convergence = 'time', verbose = FALSE, lowerBound = 0, lightFilter = FALSE, variableOrdering = NULL, lns = FALSE, lns.nRestarts = 100, lns.failureLimit = 500, lns.maxDiscrepancy = 2, lns.restartFilter = 70){
     #Validate the matrix as a JavaMatrix
-    javaMatrix = mssm.tools.as(x, 'javaMatrix')
+    javaMatrix = mssm.asJavaMatrix(x)#mssm.tools.as(x, 'javaMatrix')
     #Validate the budget as an integer
     if(as.integer(budget) != budget){
         budget = as.integer(budget)
@@ -157,9 +157,23 @@ mssm.search.cpgc<-function(x, budget = 10, convergence = 'time', verbose = FALSE
     if(!is.null(variableOrdering) && !(is.vector(variableOrdering) && length(variableOrdering) == dim(mssm.fromJavaMatrix(javaMatrix))[2])){
         stop("Argument `variableOrdering` should be NA or a vector of size equal to the number of columns of `x`.")
     }
-    method = new(mssm.jInst("CPGC"), javaMatrix, budget, as.integer(convergence), verbose, as.numeric(lowerBound), lightFilter)
+    # method = new(J("uclouvain.mssm.cp.CPGC"), javaMatrix)
+    # print("----")
+    # print(str(javaMatrix))
+    # print("---")
+    # print(str(x))
+    # print("--")
+    # a = mssm.jInst("CPGC")
+    method = .jnew("uclouvain/mssm/cp/CPGC", javaMatrix, as.integer(budget), as.integer(convergence), verbose, as.numeric(lowerBound), lightFilter)
+    # method$setMatrix()
+    # method$setBudget(as.integer(budget))
+    # method$setConvergence(as.integer(convergence))
+    # method$setVerbose(verbose)
+    # method$setLowerBound(as.numeric(lowerBound))
+    # method$setLightFilter(lightFilter)
+    # method = new(mssm.jInst("CPGC"), javaMatrix, as.integer(budget), as.integer(convergence), verbose, as.numeric(lowerBound), lightFilter)
     if(!is.null(variableOrdering)){
-        if(min(variableOrdering) == 1 && max(variableOrdering) == length(variableOrdering)){
+        if(min(variableOrdering) > 0 && max(variableOrdering) == length(variableOrdering)){
             variableOrdering = variableOrdering - 1
         }
         method$heuristicOnCols(as.integer(variableOrdering))

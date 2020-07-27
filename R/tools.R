@@ -68,7 +68,6 @@ mssm.loadMatrix<-function(filePath='data.tsv', sep='\t'){
 #' See also package [mssm].
 #' @export
 mssm.asJavaMatrix<-function(matrix){
-    return(mssm.tools.as(matrix, "javaMatrix"))
     #Tests if it is a Java matrix
     if(mssm.isJavaRectArray(matrix)){
         return(matrix)
