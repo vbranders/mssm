@@ -1,12 +1,10 @@
 
 # library(devtools)
 # install_github("vbranders/mssm")
+library("mssm")
 
 # -----------------
 # Example with importing data from file and executing a search
-
-setwd("example")
-library("mssm")
 
 #Open a matrix
 mat = as.matrix(read.csv("data.tsv", sep="\t", dec=".", header=FALSE, stringsAsFactors=FALSE))
@@ -23,8 +21,6 @@ print(solution)
 
 # -----------------
 # Example with making a matrix with uniform background and inserting solution
-
-library("mssm")
 
 build.matrix<-function(nr=500, nc=200, FUN = rnorm, ...){
     return(matrix(FUN(...), nrow = nr, ncol = nc, byrow = TRUE))
